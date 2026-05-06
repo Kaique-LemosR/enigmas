@@ -1,0 +1,68 @@
+/* Reset básico para tela cheia */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000; /* Escuridão total */
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+}
+
+/* O ponto ativador da luz UV */
+#btn-uv-toggle {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: #080808; /* Quase invisível no preto */
+    cursor: pointer;
+    user-select: none;
+    z-index: 100;
+}
+
+/* Centralização do input */
+#container-investigacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#input-final {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #111;
+    color: #00ff00; /* Verde terminal ao digitar */
+    font-size: 28px;
+    text-align: center;
+    outline: none;
+    width: 300px;
+    z-index: 50;
+    letter-spacing: 5px;
+}
+
+/* Configuração dos símbolos secretos */
+.simbolo {
+    position: absolute;
+    color: #05000a; /* Invisível sem a lanterna */
+    font-size: 40px;
+    user-select: none;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+/* Classe aplicada pelo JavaScript quando a lanterna passa por cima */
+.revelado {
+    color: #9300ff !important; /* Violeta UV */
+    text-shadow: 0 0 15px #9300ff, 0 0 30px #4b0082;
+}
+
+/* O brilho da lanterna no mouse */
+#lanterna {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(147, 0, 255, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    display: none; /* Começa desligada */
+    z-index: 40;
+}
