@@ -1,62 +1,254 @@
-// --- Dicas no F12 (Console) ---
-console.log("%c[ACESSO RESTRITO - EMPRESAS ARGENTTO]", "color: #9300ff; font-size: 16px; font-weight: bold;");
-// Pista sobre o incidente de Jaguacinim com Leon Canídis
-console.log("LOG: Interrogatório de Leon Canídis finalizado em 30/09.");
-// Pista sobre o deslocamento da Cifra de César (Delta)
-console.log("DICA: O deslocamento é a diferença (Δ) entre o início e o fim do incidente.");
-// Referência ao avô e à família Moretti
-console.log("STATUS: Ativo de alto valor (Avô) movido para Setor Moretti.");
+const input = document.getElementById("command-input");
+const output = document.getElementById("terminal-output");
+const body = document.body;
 
-const lanterna = document.getElementById('lanterna');
-const btnUv = document.getElementById('btn-uv-toggle');
-const input = document.getElementById('input-final');
-let uvAtivada = false;
+let entityUnlocked = false;
+let rupture1 = false;
+let rupture2 = false;
+let rupture3 = false;
 
-// 1. Ligar/Desligar Lanterna UV através do ponto invisível
-btnUv.addEventListener('click', () => {
-    uvAtivada = !uvAtivada;
-    lanterna.style.display = uvAtivada ? 'block' : 'none';
-    console.log(uvAtivada ? "Sensor UV: ATIVADO" : "Sensor UV: DESATIVADO");
-});
+function print(text) {
+    output.innerHTML += `<br>${text}`;
+    output.scrollTop = output.scrollHeight;
+}
 
-// 2. Movimentação da Lanterna e Efeito de Revelação de Símbolos
-document.addEventListener('mousemove', (e) => {
-    if (!uvAtivada) return;
+function entityTransition() {
 
-    // Ajusta a posição do brilho violeta
-    lanterna.style.left = (e.clientX - 150) + 'px';
-    lanterna.style.top = (e.clientY - 150) + 'px';
+    body.classList.add("entity-mode");
 
-    // Lógica para detectar símbolos dos Moretti ou pistas de Nathan
-    const simbolos = document.querySelectorAll('.simbolo');
-    simbolos.forEach(s => {
-        const rect = s.getBoundingClientRect();
-        const centroX = rect.left + rect.width / 2;
-        const centroY = rect.top + rect.height / 2;
-        
-        const dist = Math.hypot(e.clientX - centroX, e.clientY - centroY);
-        
-        if (dist < 120) {
-            s.classList.add('revelado');
+    setTimeout(() => {
+        print("...");
+    }, 1000);
+
+    setTimeout(() => {
+        print("MUITO BEM.");
+    }, 2500);
+
+    setTimeout(() => {
+        print("VOCÊS ENCONTRARAM A FERIDA.");
+    }, 4500);
+
+    setTimeout(() => {
+        print("AGORA... EU POSSO ESCUTAR VOCÊS.");
+    }, 7000);
+
+    setTimeout(() => {
+        print("PRIMEIRA RUPTURA:");
+        print("QUANDO A PRIMEIRA RUPTURA OCORREU?");
+        entityUnlocked = true;
+    }, 9000);
+}
+
+function ruptureSystem(command) {
+
+    if (!rupture1) {
+
+        if (command === "3009") {
+
+            rupture1 = true;
+
+            print("MUITO BEM.");
+            print("VOCÊ SE LEMBRA.");
+
+            setTimeout(() => {
+                print("SEGUNDA RUPTURA:");
+                print("QUAL TRAUMA FEZ VOCÊ ME ESCUTAR, MEU CORDEIRO?");
+            }, 2500);
+
         } else {
-            s.classList.remove('revelado');
+            print("VOCÊ AINDA NÃO ESCUTA.");
         }
-    });
-});
 
-// 3. Verificação da Palavra-Chave Final
-input.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        const resposta = input.value.toLowerCase().trim();
-        
-        // Se a resposta for a correta (exemplo: argentto)
-        if (resposta === "leon") {
-            alert("ACESSO CONCEDIDO. Localizando alvo...");
-            // Redireciona para o mapa ou próxima pista
-            window.location.href = "https://www.google.com/maps?q=-26.3045,-48.8434";
+        return;
+    }
+
+    if (!rupture2) {
+
+        const traumas = [
+            "celeiro",
+            "jaguacinim",
+            "apostas"
+        ];
+
+        if (traumas.includes(command)) {
+
+            rupture2 = true;
+
+            print("A DOR SEMPRE ABRE A PORTA.");
+
+            setTimeout(() => {
+                print("TERCEIRA RUPTURA:");
+                print("SE O MEDO DESAPARECER... O QUE RESTARÁ DE VOCÊ?");
+            }, 2500);
+
         } else {
-            input.value = "";
-            console.warn("TENTATIVA INVÁLIDA REGISTRADA NO SISTEMA.");
+            print("TODO CORDEIRO CARREGA UMA FERIDA.");
         }
+
+        return;
+    }
+
+    if (!rupture3) {
+
+        const finalAnswers = [
+            "o chamado",
+            "chamado",
+            "transcendencia",
+            "transcendência"
+        ];
+
+        if (finalAnswers.includes(command)) {
+
+            rupture3 = true;
+
+            body.classList.add("glitch");
+
+            print("VOCÊ ENTENDE AGORA.");
+
+            setTimeout(() => {
+                print("O MEDO NÃO ERA A PRISÃO.");
+            }, 2000);
+
+            setTimeout(() => {
+                print("ERA A PORTA.");
+            }, 4000);
+
+            setTimeout(() => {
+                print("VOCÊ NÃO ENCONTROU O CHAMADO.");
+            }, 7000);
+
+            setTimeout(() => {
+                print("O CHAMADO ENCONTROU VOCÊ.");
+            }, 10000);
+
+        } else {
+            print("VOCÊ TEM MEDO DEMAIS PARA ENTENDER.");
+        }
+    }
+}
+
+input.addEventListener("keydown", function (e) {
+
+    if (e.key !== "Enter") return;
+
+    const command = input.value.trim().toLowerCase();
+
+    print(`>> ${command}`);
+
+    input.value = "";
+
+    if (entityUnlocked) {
+        ruptureSystem(command);
+        return;
+    }
+
+    switch (command) {
+
+        case "help":
+
+            print(`
+AVAILABLE COMMANDS:
+
+help
+logs
+open [file]
+coords
+clear
+            `);
+
+            break;
+
+        case "logs":
+
+            print(`
+AVAILABLE FILES:
+
+incident_jaguacinim
+panacea_report
+chimera_project
+patient_n
+            `);
+
+            break;
+
+        case "coords":
+
+            print(`
+PARTIAL COORDINATES FOUND:
+
+25.____ S
+51.____ W
+            `);
+
+            break;
+
+        case "open incident_jaguacinim":
+
+            print(`
+INCIDENT REPORT:
+
+CITY STATUS: LOST
+MILITARY INTERVENTION FAILED
+PERIMETER COLLAPSED AT 03:09
+FILES REMOVED BY FEDERAL ORDER
+            `);
+
+            break;
+
+        case "open panacea_report":
+
+            print(`
+PANACEA INTERNAL LOG:
+
+SUBJECTS CONTINUE RESPONDING TO FREQUENCY
+PAIN RESPONSE LOST
+AUDITORY REACTION REMAINS
+            `);
+
+            break;
+
+        case "open chimera_project":
+
+            print(`
+PROJECT CHIMERA:
+
+BIO-PARANORMAL FUSION TESTS
+SUBJECTS UNSTABLE
+FLESH REACTS TO SIGNAL
+            `);
+
+            break;
+
+        case "open patient_n":
+
+            print("ACCESSING FILE...");
+
+            setTimeout(() => {
+                entityTransition();
+            }, 3000);
+
+            break;
+
+        case "25.4128 -51.6821":
+
+            print(`
+LOCATION FOUND:
+
+JAGUACINIM - PR
+ACCESS LEVEL UPDATED
+NEW FILE AVAILABLE: patient_n
+            `);
+
+            break;
+
+        case "clear":
+
+            output.innerHTML = "";
+
+            break;
+
+        default:
+
+            print("COMMAND NOT RECOGNIZED");
     }
 });

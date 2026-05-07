@@ -1,68 +1,69 @@
-/* Reset básico para tela cheia */
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #000; /* Escuridão total */
-    overflow: hidden;
-    font-family: 'Courier New', monospace;
+body{
+    margin:0;
+    overflow:hidden;
 }
 
-/* O ponto ativador da luz UV */
-#btn-uv-toggle {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    color: #080808; /* Quase invisível no preto */
-    cursor: pointer;
-    user-select: none;
-    z-index: 100;
+#boot-screen{
+    padding:20px;
+    color:#888;
+    animation:flicker 4s infinite;
 }
 
-/* Centralização do input */
-#container-investigacao {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+#terminal-container{
+    width:90%;
+    height:90vh;
+    margin:auto;
+    padding:20px;
 }
 
-#input-final {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #111;
-    color: #00ff00; /* Verde terminal ao digitar */
-    font-size: 28px;
-    text-align: center;
-    outline: none;
-    width: 300px;
-    z-index: 50;
-    letter-spacing: 5px;
+#terminal-output{
+    white-space:pre-wrap;
+    overflow-y:auto;
+    height:85vh;
 }
 
-/* Configuração dos símbolos secretos */
-.simbolo {
-    position: absolute;
-    color: #05000a; /* Invisível sem a lanterna */
-    font-size: 40px;
-    user-select: none;
-    transition: color 0.2s, text-shadow 0.2s;
+#input-line{
+    display:flex;
+    align-items:center;
 }
 
-/* Classe aplicada pelo JavaScript quando a lanterna passa por cima */
-.revelado {
-    color: #9300ff !important; /* Violeta UV */
-    text-shadow: 0 0 15px #9300ff, 0 0 30px #4b0082;
+#input-line span{
+    margin-right:10px;
 }
 
-/* O brilho da lanterna no mouse */
-#lanterna {
-    position: fixed;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(147, 0, 255, 0.1) 0%, transparent 70%);
-    pointer-events: none;
-    display: none; /* Começa desligada */
-    z-index: 40;
+#command-input{
+    background:transparent;
+    border:none;
+    color:#d4d4d4;
+    font-family:"Courier New", monospace;
+    font-size:16px;
+    width:100%;
+    outline:none;
+}
+
+.entity-mode{
+    background:black;
+    color:#8b0000;
+}
+
+.entity-mode #command-input{
+    color:#8b0000;
+}
+
+.glitch{
+    animation:glitch 0.2s infinite;
+}
+
+@keyframes flicker{
+    0%{opacity:1;}
+    50%{opacity:0.95;}
+    100%{opacity:1;}
+}
+
+@keyframes glitch{
+    0%{transform:translate(0px);}
+    25%{transform:translate(1px,-1px);}
+    50%{transform:translate(-1px,1px);}
+    75%{transform:translate(1px,1px);}
+    100%{transform:translate(0px);}
 }

@@ -1,49 +1,56 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memorias esquecidas</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- 
-        LOG_SEGURANÇA_ARGENTTO: 
-        "A verdade sobre Jaguacinim foi enterrada em 30 de setembro."[cite: 1]
-        "O monstro de Nathan não estava no celeiro."[cite: 2]
-        CHAVE_DE_ACESSO: Deslocamento Delta (Δ)
-    -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MORETTI HOLDING TERMINAL</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="vazio">
+<body>
 
-    <!-- Botão invisível para ativar a luz UV (fica no canto superior esquerdo) -->
-    <div id="btn-uv-toggle" title="Ativar Sensor">.</div>
+<audio id="bg-audio" autoplay loop>
+  <source src="assets/audio/static.mp3" type="audio/mpeg">
+</audio>
 
-    <div id="container-investigacao">
-        
-        <!-- Input central para a palavra-chave -->
-        <div class="input-wrapper">
-            <input type="text" id="input-final" placeholder="" autocomplete="off" autofocus>
-            <div class="linha-decorativa"></div>
-        </div>
+<div id="boot-screen">
+  <pre>
+MORETTI HOLDING INTERNAL SYSTEM
+RESTORING ARCHIVE...
+CONNECTION STABLE
+  </pre>
+</div>
 
-        <!-- Camada de Símbolos Ocultos -->
-        <div id="camada-simbolos">
-            <!-- Símbolos que remetem ao ocultismo e às lores -->
-            <span class="simbolo" style="top: 15%; left: 10%;" data-info="Leon">Ψ</span>
-            <span class="simbolo" style="top: 80%; left: 85%;" data-info="Moretti">⛥</span>
-            <span class="simbolo" style="top: 25%; left: 75%;" data-info="Nathan">Δ</span>
-            <span class="simbolo" style="top: 70%; left: 20%;" data-info="Panacea">☣</span>
-            
-            <!-- Fragmentos de texto da Cifra de César espalhados -->
-            <p class="simbolo texto-fragmento" style="top: 50%; left: 15%;">Kru r v</p>
-            <p class="simbolo texto-fragmento" style="top: 40%; left: 80%;">v r o t q r</p>
-        </div>
+<div id="terminal-container">
 
-        <!-- O efeito visual da lanterna -->
-        <div id="lanterna"></div>
+  <div id="terminal-output">
 
-    </div>
+<pre>
+MORETTI HOLDING INTERNAL TERMINAL v2.3
 
-    <!-- Scripts de lógica e mensagens no console -->
-    <script src="script.js"></script>
+STATUS:
+ARCHIVE CONNECTION RESTORED
+
+AVAILABLE COMMANDS:
+help
+logs
+open [file]
+coords
+clear
+
+WARNING:
+UNAUTHORIZED ACCESS WILL BE REPORTED
+</pre>
+
+  </div>
+
+  <div id="input-line">
+    <span>>></span>
+    <input type="text" id="command-input" autofocus autocomplete="off">
+  </div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
