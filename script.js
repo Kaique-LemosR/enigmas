@@ -50,7 +50,7 @@ input.addEventListener('keypress', (e) => {
         const resposta = input.value.toLowerCase().trim();
         
         // Se a resposta for a correta (exemplo: argentto)
-        if (resposta === "argentto") {
+        if (resposta === "leon") {
             alert("ACESSO CONCEDIDO. Localizando alvo...");
             // Redireciona para o mapa ou próxima pista
             window.location.href = "https://www.google.com/maps?q=-26.3045,-48.8434";
